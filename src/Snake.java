@@ -1,13 +1,15 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Snake {
 
     public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
+    private List<Listener> listeners = new ArrayList<>();
 
 
-    public static Point head;
-    public static ArrayList<Point> snakeParts = new ArrayList<Point>();
+    public Point head;
+    public ArrayList<Point> snakeParts = new ArrayList<Point>();
     private Mar marO = new Mar();
 
 
@@ -51,27 +53,27 @@ public class Snake {
             if (head.x == Mar.mar.x && head.y == Mar.mar.y) {
                 Mar.MarNou();
                 snakeParts.add(new Point(-100, -100));
-                Game.score();
-                if (Game.score % 3 == 0) {
-                    Controller.speed = Controller.speed - 1;
+                for (Listener l: this.listeners) {
+                    l.onEvent("eat");
                 }
-                System.out.println(Controller.speed);
+
 
 
             }
             if (snakeParts.contains(head) || head.x == -10 || head.x == 480 || head.y == -10 || head.y == 450) {
-                System.out.println(head.x + "    " + head.y);
-                Game.timer.stop();
-                RenderPanel.gameOver();
-
-
-                System.out.println("am prins coada" + head.x);
-
+                for (Listener l: this.listeners) {
+                    l.onEvent("gameOver");
+                }
             }
 
         }
+        for (Listener l: this.listeners) {
+            l.onEvent("update");
+        }
+    }
 
-
+    public void addEventListener(Listener l){
+        this.listeners.add(l);
     }
 
 }

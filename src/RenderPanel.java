@@ -10,16 +10,16 @@ public class RenderPanel extends JPanel {
 
     private Point head, mar;
     private List<Point> tail;
-    static boolean gameOver = false;
-
+    boolean gameOver = false;
+    private int score = 0;
 
     private Image img;
 
 
-    public RenderPanel() {
+    public RenderPanel(Snake snake) {
 
-        this.head = Snake.head;
-        this.tail = Snake.snakeParts;
+        this.head = snake.head;
+        this.tail = snake.snakeParts;
        this.mar = Mar.mar;
         try {
             this.img = ImageIO.read(new File("Imagini/appleO.png"));
@@ -29,9 +29,9 @@ public class RenderPanel extends JPanel {
 
     }
 
-    public static void gameOver() {
+    public void gameOver(int score) {
         gameOver = true;
-
+        this.score = score;
     }
 
 
@@ -58,7 +58,7 @@ public class RenderPanel extends JPanel {
           g.drawImage(img, mar.x, mar.y, Game.GRIDSIZE, Game.GRIDSIZE, null);
 
             g.setColor(Color.BLUE);
-            g.drawString("Score is " + Game.score, 10, 10);
+            g.drawString("Score is " + score, 10, 10);
 
 
         }

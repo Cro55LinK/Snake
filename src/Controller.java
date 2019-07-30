@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 
 public class Controller implements KeyListener, ActionListener {
     private static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
-    private final RenderPanel panel;
 
     private double ticks = 0;
     private int direction = RIGHT;
@@ -15,9 +14,8 @@ public class Controller implements KeyListener, ActionListener {
     private Snake snake;
 
 
-    public Controller(Snake snake, RenderPanel renderPanel) {
+    public Controller(Snake snake) {
         this.snake = snake;
-        this.panel = renderPanel;
     }
 
 
@@ -47,8 +45,6 @@ public class Controller implements KeyListener, ActionListener {
             handledInput = true;
             snake.update(direction);
         }
-        panel.repaint();
-
     }
 
 

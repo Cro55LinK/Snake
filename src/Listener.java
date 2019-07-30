@@ -1,3 +1,3 @@
 public interface Listener {
-    void onEvent();
+    void onEvent(String event);
 }

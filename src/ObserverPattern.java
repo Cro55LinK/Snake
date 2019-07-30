@@ -22,7 +22,7 @@ public class ObserverPattern {  // asta este game
 
     private void fireEvent(){
         for (Listener l: this.listeners) {
-            l.onEvent();
+            l.onEvent("eat");
         }
     }
 
